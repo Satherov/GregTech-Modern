@@ -1,5 +1,6 @@
 package com.gregtechceu.gtceu.integration.kjs.recipe.components;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.addon.AddonFinder;
 import com.gregtechceu.gtceu.api.addon.events.KJSRecipeKeyEvent;
 import com.gregtechceu.gtceu.api.capability.recipe.*;
@@ -26,6 +27,11 @@ public class GTRecipeComponents {
     public static final RecipeComponent<CompoundTag> TAG = new RecipeComponent<>() {
 
         @Override
+        public RecipeComponentType<CompoundTag> type() {
+            return RecipeComponentType.unit(GTCEu.id("tag"), GTRecipeComponents.TAG);
+        }
+
+        @Override
         public Codec<CompoundTag> codec() {
             return CompoundTag.CODEC;
         }
@@ -41,6 +47,11 @@ public class GTRecipeComponents {
         }
     };
     public static final RecipeComponent<ResourceLocation> RESOURCE_LOCATION = new RecipeComponent<>() {
+
+        @Override
+        public RecipeComponentType<ResourceLocation> type() {
+            return RecipeComponentType.unit(GTCEu.id("resource_location"), GTRecipeComponents.RESOURCE_LOCATION);
+        }
 
         @Override
         public Codec<ResourceLocation> codec() {
@@ -60,6 +71,11 @@ public class GTRecipeComponents {
     public static final RecipeComponent<RecipeCapability<?>> RECIPE_CAPABILITY = new RecipeComponent<>() {
 
         @Override
+        public RecipeComponentType<RecipeCapability<?>> type() {
+            return RecipeComponentType.unit(GTCEu.id("recipe_capability"), GTRecipeComponents.RECIPE_CAPABILITY);
+        }
+
+        @Override
         public Codec<RecipeCapability<?>> codec() {
             return RecipeCapability.DIRECT_CODEC;
         }
@@ -75,6 +91,11 @@ public class GTRecipeComponents {
         }
     };
     public static final RecipeComponent<ChanceLogic> CHANCE_LOGIC = new RecipeComponent<>() {
+
+        @Override
+        public RecipeComponentType<ChanceLogic> type() {
+            return RecipeComponentType.unit(GTCEu.id("chance_logic"), GTRecipeComponents.CHANCE_LOGIC);
+        }
 
         @Override
         public Codec<ChanceLogic> codec() {
@@ -95,6 +116,11 @@ public class GTRecipeComponents {
     public static final RecipeComponent<RecipeCondition<?>> RECIPE_CONDITION = new RecipeComponent<>() {
 
         @Override
+        public RecipeComponentType<RecipeCondition<?>> type() {
+            return RecipeComponentType.unit(GTCEu.id("recipe_condition"), GTRecipeComponents.RECIPE_CONDITION);
+        }
+
+        @Override
         public Codec<RecipeCondition<?>> codec() {
             return RecipeCondition.CODEC;
         }
@@ -111,6 +137,11 @@ public class GTRecipeComponents {
     };
 
     public static final RecipeComponent<EnergyStack.WithIO> ENERGY_STACK = new RecipeComponent<>() {
+
+        @Override
+        public RecipeComponentType<EnergyStack.WithIO> type() {
+            return RecipeComponentType.unit(GTCEu.id("energy_stack"), GTRecipeComponents.ENERGY_STACK);
+        }
 
         @Override
         public Codec<EnergyStack.WithIO> codec() {
@@ -131,9 +162,11 @@ public class GTRecipeComponents {
         }
     };
 
-    public static final ContentJS<SizedIngredient> ITEM = ContentJS.create(SizedIngredientComponent.NESTED,
+    public static final ContentJS<SizedIngredient> ITEM = ContentJS.create(
+            SizedIngredientComponent.SIZED_INGREDIENT.instance(),
             GTRecipeCapabilities.ITEM);
-    public static final ContentJS<SizedFluidIngredient> FLUID = ContentJS.create(SizedFluidIngredientComponent.NESTED,
+    public static final ContentJS<SizedFluidIngredient> FLUID = ContentJS.create(
+            SizedFluidIngredientComponent.NESTED.instance(),
             GTRecipeCapabilities.FLUID);
     public static final ContentJS<EnergyStack.WithIO> EU = ContentJS.create(ENERGY_STACK, GTRecipeCapabilities.EU);
     public static final ContentJS<Integer> CWU = ContentJS.create(NumberComponent.INT, GTRecipeCapabilities.CWU);

@@ -1,13 +1,14 @@
 package com.gregtechceu.gtceu.integration.kjs.recipe.components;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.capability.recipe.RecipeCapability;
 import com.gregtechceu.gtceu.api.recipe.content.Content;
 
 import com.mojang.serialization.Codec;
-import dev.latvian.mods.kubejs.recipe.KubeRecipe;
+import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
+import dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;
 import dev.latvian.mods.kubejs.recipe.match.ReplacementMatchInfo;
-import dev.latvian.mods.rhino.Context;
 import dev.latvian.mods.rhino.type.TypeInfo;
 
 public record ContentJS<T>(RecipeComponent<T> baseComponent, RecipeCapability<?> capability)
@@ -15,6 +16,11 @@ public record ContentJS<T>(RecipeComponent<T> baseComponent, RecipeCapability<?>
 
     public static <T> ContentJS<T> create(RecipeComponent<T> baseComponent, RecipeCapability<?> capability) {
         return new ContentJS<>(baseComponent, capability);
+    }
+
+    @Override
+    public RecipeComponentType<Content> type() {
+        return RecipeComponentType.unit(GTCEu.id(this.toString()), this);
     }
 
     @Override
@@ -28,9 +34,9 @@ public record ContentJS<T>(RecipeComponent<T> baseComponent, RecipeCapability<?>
     }
 
     @Override
-    public Content replace(Context cx, KubeRecipe recipe, Content original, ReplacementMatchInfo match, Object with) {
+    public Content replace(RecipeScriptContext cx, Content original, ReplacementMatchInfo match, Object with) {
         return new Content(
-                baseComponent.replace(cx, recipe, baseComponent.wrap(cx, recipe, original.content), match, with),
+                baseComponent.replace(cx, baseComponent.wrap(cx, original.content), match, with),
                 original.chance, original.maxChance, original.tierChanceBoost);
     }
 

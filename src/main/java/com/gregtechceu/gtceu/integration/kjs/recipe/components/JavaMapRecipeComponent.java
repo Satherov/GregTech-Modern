@@ -1,10 +1,12 @@
 package com.gregtechceu.gtceu.integration.kjs.recipe.components;
 
+import com.gregtechceu.gtceu.GTCEu;
+
 import com.mojang.serialization.Codec;
-import dev.latvian.mods.kubejs.recipe.KubeRecipe;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;
 import dev.latvian.mods.kubejs.recipe.component.*;
 import dev.latvian.mods.kubejs.recipe.match.ReplacementMatchInfo;
-import dev.latvian.mods.rhino.Context;
 import dev.latvian.mods.rhino.type.TypeInfo;
 
 import java.util.HashMap;
@@ -14,12 +16,11 @@ public record JavaMapRecipeComponent<K, V>(RecipeComponent<K> key, RecipeCompone
         implements RecipeComponent<Map<K, V>> {
 
     @Override
-    public Map<K, V> replace(Context cx, KubeRecipe recipe, Map<K, V> original, ReplacementMatchInfo match,
-                             Object with) {
+    public Map<K, V> replace(RecipeScriptContext cx, Map<K, V> original, ReplacementMatchInfo match, Object with) {
         var map = original;
 
         for (Map.Entry<K, V> entry : original.entrySet()) {
-            var r = value.replace(cx, recipe, entry.getValue(), match, with);
+            var r = value.replace(cx, entry.getValue(), match, with);
             if (r != entry.getValue()) {
                 if (map == original) {
                     map = new HashMap<>(original);
@@ -34,6 +35,21 @@ public record JavaMapRecipeComponent<K, V>(RecipeComponent<K> key, RecipeCompone
     @Override
     public String toString() {
         return "java_map{" + key + ":" + value + "}";
+    }
+
+    /**
+     * see {@link ListRecipeComponent#TYPE}
+     */
+    public static final RecipeComponentType<?> TYPE = RecipeComponentType
+            .<JavaMapRecipeComponent<?, ?>>dynamic(GTCEu.id("java_map"),
+                    (type, ctx) -> RecordCodecBuilder.mapCodec(instance -> instance.group(
+                            ctx.recipeComponentCodec().fieldOf("key").forGetter(JavaMapRecipeComponent::key),
+                            ctx.recipeComponentCodec().fieldOf("value").forGetter(JavaMapRecipeComponent::value))
+                            .apply(instance, JavaMapRecipeComponent::new)));
+
+    @Override
+    public RecipeComponentType<?> type() {
+        return TYPE;
     }
 
     @Override
