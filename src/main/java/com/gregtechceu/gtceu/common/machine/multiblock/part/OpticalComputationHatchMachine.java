@@ -12,8 +12,6 @@ import lombok.Getter;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class OpticalComputationHatchMachine extends MultiblockPartMachine {
 
     @Getter

@@ -32,8 +32,6 @@ import java.util.Iterator;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class LargeCombustionEngineMachine extends WorkableElectricMultiblockMachine implements ITieredMachine {
 
     private static final FluidStack OXYGEN_STACK = GTMaterials.Oxygen.getFluid(1);

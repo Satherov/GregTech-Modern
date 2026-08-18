@@ -14,8 +14,6 @@ import lombok.Getter;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class EnergyHatchPartMachine extends TieredIOPartMachine {
 
     @SaveField

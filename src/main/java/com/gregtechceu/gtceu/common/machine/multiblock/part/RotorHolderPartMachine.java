@@ -42,8 +42,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties.*;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class RotorHolderPartMachine extends TieredPartMachine implements IMuiMachine {
 
     public static final int SPEED_INCREMENT = 1;

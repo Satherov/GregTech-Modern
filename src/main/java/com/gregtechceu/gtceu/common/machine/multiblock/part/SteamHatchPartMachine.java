@@ -10,8 +10,6 @@ import net.minecraftforge.fluids.FluidType;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class SteamHatchPartMachine extends FluidHatchPartMachine {
 
     public static final int INITIAL_TANK_CAPACITY = 64 * FluidType.BUCKET_VOLUME;

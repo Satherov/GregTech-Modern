@@ -49,8 +49,6 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class CentralMonitorMachine extends WorkableElectricMultiblockMachine
                                    implements IMonitorComponent, IDataInfoProvider {
 

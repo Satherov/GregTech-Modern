@@ -30,8 +30,6 @@ import java.util.Set;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class ConverterMachine extends TieredMachine {
 
     @SaveField

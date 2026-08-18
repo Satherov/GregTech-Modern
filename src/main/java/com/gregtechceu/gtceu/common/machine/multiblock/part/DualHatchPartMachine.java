@@ -33,8 +33,6 @@ import java.util.Arrays;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class DualHatchPartMachine extends ItemBusPartMachine {
 
     public static final int INITIAL_TANK_CAPACITY = 16 * FluidType.BUCKET_VOLUME;

@@ -24,8 +24,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class FluidDrillMachine extends WorkableElectricMultiblockMachine implements ITieredMachine {
 
     @Getter

@@ -55,8 +55,6 @@ import java.util.Set;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class PumpMachine extends TieredEnergyMachine implements IMuiMachine {
 
     public static final int BASE_PUMP_RADIUS = 16;

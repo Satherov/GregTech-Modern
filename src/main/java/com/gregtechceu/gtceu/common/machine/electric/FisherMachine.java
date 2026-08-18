@@ -54,8 +54,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class FisherMachine extends TieredEnergyMachine
                            implements IMuiMachine, IWorkable {
 

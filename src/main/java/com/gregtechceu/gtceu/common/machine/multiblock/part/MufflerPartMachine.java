@@ -39,8 +39,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.gregtechceu.gtceu.common.mui.GTMuiMachineUtil.createSquareSlotGroupFromInventory;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class MufflerPartMachine extends TieredPartMachine implements IMuiMachine {
 
     @Getter

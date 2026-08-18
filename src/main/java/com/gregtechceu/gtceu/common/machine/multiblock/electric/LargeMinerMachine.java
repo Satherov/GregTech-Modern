@@ -58,8 +58,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.gregtechceu.gtceu.common.data.GTMaterials.DrillingFluid;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class LargeMinerMachine extends WorkableElectricMultiblockMachine
                                implements IMiner, IControllable, IDataInfoProvider {
 

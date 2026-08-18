@@ -37,8 +37,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.abilities;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class ActiveTransformerMachine extends WorkableElectricMultiblockMachine
                                       implements IControllable {
 

@@ -33,8 +33,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class MultiblockTankMachine extends MultiblockControllerMachine implements IMuiMachine {
 
     @SaveField

@@ -31,8 +31,6 @@ import lombok.Getter;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class ObjectHolderMachine extends MultiblockPartMachine implements IMuiMachine {
 
     @SaveField

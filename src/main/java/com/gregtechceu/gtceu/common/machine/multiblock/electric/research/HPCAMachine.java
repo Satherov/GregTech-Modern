@@ -63,8 +63,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.gregtechceu.gtceu.data.recipe.CustomTags.HPCA_COOLANTS;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class HPCAMachine extends WorkableElectricMultiblockMachine
                          implements IOpticalComputationProvider, IControllable {
 

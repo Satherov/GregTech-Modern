@@ -36,8 +36,6 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class BlockBreakerMachine extends TieredEnergyMachine
                                  implements IMuiMachine, IControllable {
 

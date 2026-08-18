@@ -21,8 +21,6 @@ import lombok.Setter;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class TransformerMachine extends TieredEnergyMachine implements IControllable {
 
     public static final BooleanProperty TRANSFORM_UP_PROPERTY = GTMachineModelProperties.IS_TRANSFORM_UP;

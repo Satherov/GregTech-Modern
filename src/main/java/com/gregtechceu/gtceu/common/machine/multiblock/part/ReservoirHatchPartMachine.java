@@ -15,8 +15,6 @@ import java.util.Collections;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class ReservoirHatchPartMachine extends FluidHatchPartMachine {
 
     protected InfiniteWaterTank waterTank;

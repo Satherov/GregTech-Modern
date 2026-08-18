@@ -11,7 +11,6 @@ import com.gregtechceu.gtceu.api.sync_system.annotations.SaveField;
 import com.gregtechceu.gtceu.api.sync_system.data_transformers.ValueTransformer;
 import com.gregtechceu.gtceu.integration.ae2.machine.trait.GridNodeHostTrait;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -20,14 +19,10 @@ import brachy.modularui.api.drawable.IDrawable;
 import brachy.modularui.drawable.GuiTextures;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class HullMachine extends TieredPartMachine implements IMonitorComponent {
 
     @SaveField(nbtKey = "grid_node")
-    private final Object gridNodeHost;
+    private final @Nullable Object gridNodeHost;
 
     @SaveField
     protected NotifiableEnergyContainer energyContainer;

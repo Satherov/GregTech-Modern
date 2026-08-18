@@ -63,8 +63,6 @@ import java.util.stream.Stream;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class MaintenanceHatchPartMachine extends TieredPartMachine
                                          implements IMuiMachine {
 

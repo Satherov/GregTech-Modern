@@ -49,8 +49,6 @@ import java.util.Objects;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class ItemCollectorMachine extends TieredEnergyMachine
                                   implements IMuiMachine, IWorkable {
 

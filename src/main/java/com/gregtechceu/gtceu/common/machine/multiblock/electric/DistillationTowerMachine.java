@@ -34,8 +34,6 @@ import java.util.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class DistillationTowerMachine extends WorkableElectricMultiblockMachine
                                       implements FluidRecipeCapability.ICustomParallel {
 

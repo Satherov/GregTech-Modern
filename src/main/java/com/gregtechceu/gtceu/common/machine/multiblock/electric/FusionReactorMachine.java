@@ -51,8 +51,6 @@ import static com.gregtechceu.gtceu.api.recipe.OverclockingLogic.PERFECT_HALF_DU
 import static com.gregtechceu.gtceu.api.recipe.OverclockingLogic.PERFECT_HALF_VOLTAGE_FACTOR;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class FusionReactorMachine extends WorkableElectricMultiblockMachine implements ITieredMachine {
 
     // Standard OC used for Fusion

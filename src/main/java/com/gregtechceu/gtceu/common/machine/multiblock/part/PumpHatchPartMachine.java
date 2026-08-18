@@ -10,8 +10,6 @@ import net.minecraftforge.fluids.FluidType;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class PumpHatchPartMachine extends FluidHatchPartMachine {
 
     public PumpHatchPartMachine(BlockEntityCreationInfo info) {

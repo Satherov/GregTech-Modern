@@ -20,8 +20,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class TankValvePartMachine extends MultiblockPartMachine {
 
     private final FluidTankProxyTrait tankProxy;

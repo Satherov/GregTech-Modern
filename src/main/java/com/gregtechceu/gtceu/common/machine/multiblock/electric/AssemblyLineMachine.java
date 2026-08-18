@@ -35,8 +35,6 @@ import java.util.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class AssemblyLineMachine extends WorkableElectricMultiblockMachine {
 
     @Accessors(fluent = true)

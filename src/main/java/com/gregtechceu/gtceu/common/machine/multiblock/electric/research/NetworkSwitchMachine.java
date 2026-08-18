@@ -24,8 +24,6 @@ import java.util.Set;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class NetworkSwitchMachine extends DataBankMachine implements IOpticalComputationProvider {
 
     public static final int EUT_PER_HATCH = GTValues.VA[GTValues.IV];

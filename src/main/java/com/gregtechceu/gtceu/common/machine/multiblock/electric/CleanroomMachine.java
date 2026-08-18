@@ -80,8 +80,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
 import static com.gregtechceu.gtceu.common.mui.GTByteBufAdapters.COMPONENT;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class CleanroomMachine extends WorkableElectricMultiblockMachine
                               implements IDataInfoProvider {
 

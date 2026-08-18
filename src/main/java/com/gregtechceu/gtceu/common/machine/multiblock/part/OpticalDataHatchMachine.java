@@ -24,8 +24,6 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class OpticalDataHatchMachine extends MultiblockPartMachine implements IOpticalDataAccessHatch {
 
     @Getter

@@ -20,8 +20,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class CokeOvenHatch extends MultiblockPartMachine {
 
     public final ItemHandlerProxyTrait inputInventory, outputInventory;

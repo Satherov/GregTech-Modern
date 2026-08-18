@@ -21,8 +21,6 @@ import lombok.Getter;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class DiodePartMachine extends TieredIOPartMachine {
 
     // spotless:off

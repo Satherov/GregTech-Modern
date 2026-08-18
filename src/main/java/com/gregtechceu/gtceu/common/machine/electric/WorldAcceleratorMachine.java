@@ -47,8 +47,6 @@ import java.util.Set;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class WorldAcceleratorMachine extends TieredEnergyMachine implements IControllable {
 
     private static final Map<String, Class<?>> blacklistedClasses = new Object2ObjectOpenHashMap<>();

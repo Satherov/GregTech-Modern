@@ -44,8 +44,6 @@ import java.util.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class DataAccessHatchMachine extends TieredPartMachine
                                     implements IMuiMachine, IDataAccessHatch, IDataInfoProvider, IMonitorComponent {
 
