@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class GTTransferUtils {
@@ -57,19 +58,19 @@ public class GTTransferUtils {
      * @param side  Side of block
      * @return LazyOpt of ItemHandler of given block
      */
-    public static LazyOptional<IItemHandler> getItemHandler(Level level, BlockPos pos, @Nullable Direction side) {
+    public static Optional<IItemHandler> getItemHandler(Level level, BlockPos pos, @Nullable Direction side) {
         BlockState state = level.getBlockState(pos);
         if (state.hasBlockEntity()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity != null) {
-                return blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, side);
+                return blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, side).resolve();
             }
         }
-        return LazyOptional.empty();
+        return Optional.empty();
     }
 
     // Same as getAdjacentFluidHandler, but for ItemHandler
-    public static LazyOptional<IItemHandler> getAdjacentItemHandler(Level level, BlockPos pos, Direction facing) {
+    public static Optional<IItemHandler> getAdjacentItemHandler(Level level, BlockPos pos, Direction facing) {
         return getItemHandler(level, pos.relative(facing), facing.getOpposite());
     }
 

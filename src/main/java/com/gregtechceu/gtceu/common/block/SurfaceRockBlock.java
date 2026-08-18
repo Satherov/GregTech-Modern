@@ -183,6 +183,6 @@ public class SurfaceRockBlock extends Block {
 
     @Override
     public MutableComponent getName() {
-        return Component.translatable("block.surface_rock", material.getLocalizedName());
+        return Component.translatable(getDescriptionId(), material.getLocalizedName());
     }
 }

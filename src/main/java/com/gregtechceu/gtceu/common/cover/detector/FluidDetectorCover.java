@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.Nullable;
 
 public class FluidDetectorCover extends DetectorCover {
 
@@ -46,6 +47,7 @@ public class FluidDetectorCover extends DetectorCover {
         setRedstoneSignalOutput(RedstoneUtil.computeRedstoneValue(storedFluid, fluidCapacity, isInverted()));
     }
 
+    @Nullable
     protected IFluidHandler getFluidHandler() {
         return FluidUtil.getFluidHandler(coverHolder.getLevel(), coverHolder.getBlockPos(), attachedSide).resolve()
                 .orElse(null);
