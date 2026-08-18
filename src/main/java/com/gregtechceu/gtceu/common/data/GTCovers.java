@@ -51,6 +51,8 @@ public class GTCovers {
             EnderRedstoneLinkCover::new);
     public final static CoverDefinition SHUTTER = register("shutter", ShutterCover::new);
     public final static CoverDefinition COVER_STORAGE = register("storage", StorageCover::new);
+    public final static CoverDefinition WIRELESS_TRANSMITTER = register(
+            "wireless_transmitter", WirelessTransmitterCover::new);
 
     public final static CoverDefinition[] CONVEYORS = registerTiered("conveyor", ConveyorCover::new,
             () -> tier -> new IOCoverRenderer(
@@ -78,10 +80,6 @@ public class GTCovers {
 
     public final static CoverDefinition MACHINE_CONTROLLER = register("machine_controller",
             MachineControllerCover::new);
-    public final static CoverDefinition WIRELESS_TRANSMITTER = register(
-            "wireless_transmitter",
-            WirelessTransmitterCover::new,
-            () -> () -> new SimpleCoverRenderer(GTCEu.id("block/cover/wireless_transmitter")));
 
     // Voiding
     public final static CoverDefinition ITEM_VOIDING = register("item_voiding", ItemVoidingCover::new);
