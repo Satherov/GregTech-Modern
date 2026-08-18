@@ -195,7 +195,7 @@ public class CommonProxy {
         ChanceLogic.init();
         GTRecipeTypes.init();
         GTRecipeCategories.init();
-        GTPatternErrors.init();
+        GTPatternErrors.init(modBus);
 
         GTFoods.init();
         GTToolTiers.init();
