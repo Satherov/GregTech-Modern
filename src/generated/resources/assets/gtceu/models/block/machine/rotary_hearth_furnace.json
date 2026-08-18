@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "loader": "gtceu:machine",
-  "machine": "gtceu:mega_blast_furnace",
+  "machine": "gtceu:rotary_hearth_furnace",
   "texture_overrides": {
     "all": "gtceu:block/casings/gcym/high_temperature_smelting_casing"
   },

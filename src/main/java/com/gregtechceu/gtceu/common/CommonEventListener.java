@@ -28,6 +28,7 @@ import com.gregtechceu.gtceu.common.commands.HazardCommands;
 import com.gregtechceu.gtceu.common.commands.MedicalConditionCommands;
 import com.gregtechceu.gtceu.common.cosmetics.GTCapes;
 import com.gregtechceu.gtceu.common.data.*;
+import com.gregtechceu.gtceu.common.data.machines.GCYMMachines;
 import com.gregtechceu.gtceu.common.data.machines.GTAEMachines;
 import com.gregtechceu.gtceu.common.fluid.potion.BottleItemFluidHandler;
 import com.gregtechceu.gtceu.common.fluid.potion.PotionItemFluidHandler;
@@ -542,6 +543,9 @@ public class CommonEventListener {
             if (mapping.getKey().equals(GTCEu.id("steam_miner"))) {
                 mapping.remap(GTMachines.STEAM_MINER.first().getBlock());
             }
+            if (mapping.getKey().equals(GTCEu.id("mega_blast_furnace"))) {
+                mapping.remap(GCYMMachines.ROTARY_HEARTH_FURNACE.getBlock());
+            }
         });
         event.getMappings(Registries.ITEM, GTCEu.MOD_ID).forEach(mapping -> {
             if (mapping.getKey().equals(GTCEu.id("tungstensteel_coil_block"))) {
@@ -555,6 +559,9 @@ public class CommonEventListener {
             }
             if (mapping.getKey().equals(GTCEu.id("avanced_nanomuscle_chestplate"))) {
                 mapping.remap(GTItems.NANO_CHESTPLATE_ADVANCED.get());
+            }
+            if (mapping.getKey().equals(GTCEu.id("mega_blast_furnace"))) {
+                mapping.remap(GCYMMachines.ROTARY_HEARTH_FURNACE.getItem());
             }
             String path = mapping.getKey().getPath();
             if (path.matches("[lhi]v_.+_wirecutter")) {
@@ -579,6 +586,9 @@ public class CommonEventListener {
         event.getMappings(Registries.BLOCK_ENTITY_TYPE, GTCEu.MOD_ID).forEach(mapping -> {
             if (mapping.getKey().equals(GTCEu.id("steam_miner"))) {
                 mapping.remap(GTMachines.STEAM_MINER.first().getBlockEntityType());
+            }
+            if (mapping.getKey().equals(GTCEu.id("mega_blast_furnace"))) {
+                mapping.remap(GCYMMachines.ROTARY_HEARTH_FURNACE.getBlockEntityType());
             }
         });
 
