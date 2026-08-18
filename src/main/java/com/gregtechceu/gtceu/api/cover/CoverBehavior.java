@@ -43,8 +43,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Represents a cover instance attached on a specific side of a machine
  */
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public abstract class CoverBehavior implements ISyncManaged, IToolGridHighlight, ICopyable {
 
     @Getter
@@ -212,7 +210,7 @@ public abstract class CoverBehavior implements ISyncManaged, IToolGridHighlight,
      * get Appearance. same as IForgeBlock.getAppearance() / IFabricBlock.getAppearance()
      */
     @Nullable
-    public BlockState getAppearance(BlockState sourceState, BlockPos sourcePos) {
+    public BlockState getAppearance(@Nullable BlockState sourceState, @Nullable BlockPos sourcePos) {
         return null;
     }
 
