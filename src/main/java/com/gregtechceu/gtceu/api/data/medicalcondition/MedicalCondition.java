@@ -65,7 +65,7 @@ public class MedicalCondition {
         this.color = color;
         this.maxProgression = maxProgression;
         this.damageTypeData = new DamageTypeData.Builder()
-                .simpleId(id.withPrefix("medical_condition/"))
+                .simpleId(id.toLanguageKey("medical_condition"))
                 .scaling(DamageScaling.NEVER)
                 // all medical conditions' damage types MUST have the bypasses_invulnerability and bypasses_cooldown
                 // tags so the death symptom works properly
