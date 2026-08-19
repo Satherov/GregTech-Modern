@@ -957,7 +957,7 @@ public interface GTRecipeSchema {
         }
 
         public GTRecipeJS biome(ResourceKey<Biome> biome, boolean reverse) {
-            HolderSet<Biome> biomes = HolderSet.direct(GTRegistries.builtinRegistry().registryOrThrow(Registries.BIOME).getHolderOrThrow(biome));
+            Supplier<HolderSet<Biome>> biomes = () -> HolderSet.direct(GTRegistries.builtinRegistry().registryOrThrow(Registries.BIOME).getHolderOrThrow(biome));
             return addCondition(new BiomeCondition(biomes).setReverse(reverse));
         }
 
@@ -966,7 +966,7 @@ public interface GTRecipeSchema {
         }
 
         public GTRecipeJS biomes(TagKey<Biome> biome, boolean reverse) {
-            HolderSet<Biome> biomes = GTRegistries.builtinRegistry().registryOrThrow(Registries.BIOME).getTag(biome)
+            Supplier<HolderSet<Biome>> biomes = () -> GTRegistries.builtinRegistry().registryOrThrow(Registries.BIOME).getTag(biome)
                     .orElseThrow(() -> new IllegalArgumentException("Unknown biome tag: " + biome.location()));
 
             return addCondition(new BiomeCondition(biomes).setReverse(reverse));
@@ -974,14 +974,6 @@ public interface GTRecipeSchema {
 
         public GTRecipeJS biomes(TagKey<Biome> biome) {
             return biomes(biome, false);
-        }
-
-        public GTRecipeJS biomes(HolderSet<Biome> biomes, boolean reverse) {
-            return addCondition(new BiomeCondition(biomes).setReverse(reverse));
-        }
-
-        public GTRecipeJS biomes(HolderSet<Biome> biomes) {
-            return biomes(biomes, false);
         }
 
         public GTRecipeJS biome(ResourceLocation biome, boolean reverse) {

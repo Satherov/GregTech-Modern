@@ -6,6 +6,7 @@ import com.gregtechceu.gtceu.api.recipe.RecipeCondition;
 import com.gregtechceu.gtceu.api.recipe.condition.RecipeConditionType;
 import com.gregtechceu.gtceu.common.data.GTRecipeConditions;
 
+import com.gregtechceu.gtceu.utils.codec.GTCodecUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -21,25 +22,31 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Supplier;
 
 @NoArgsConstructor
 public class BiomeCondition extends RecipeCondition<BiomeCondition> {
 
     // spotless:off
     public static final Codec<BiomeCondition> CODEC = RecordCodecBuilder.create(instance -> RecipeCondition.isReverse(instance).and(
-            HolderSetCodec.create(Registries.BIOME, RegistryFixedCodec.create(Registries.BIOME), true).fieldOf("biomes").forGetter(val -> val.biomes)
+            GTCodecUtils.lazyParsingCodec(HolderSetCodec.create(Registries.BIOME, RegistryFixedCodec.create(Registries.BIOME), true)).fieldOf("biomes").forGetter(val -> val.unresolvedBiomes)
     ).apply(instance, BiomeCondition::new));
     // spotless:on
 
     @Getter
-    private HolderSet<Biome> biomes = HolderSet.direct();
+    private @Nullable HolderSet<Biome> biomes;
 
-    public BiomeCondition(boolean isReverse, HolderSet<Biome> biomes) {
+    @Getter
+    private Supplier<HolderSet<Biome>> unresolvedBiomes = HolderSet::direct;
+
+    public BiomeCondition(boolean isReverse, Supplier<HolderSet<Biome>> biomes) {
         super(isReverse);
-        this.biomes = biomes;
+        this.unresolvedBiomes = biomes;
     }
 
-    public BiomeCondition(HolderSet<Biome> biomes) {
+    public BiomeCondition(Supplier<HolderSet<Biome>> biomes) {
         this(false, biomes);
     }
 
@@ -55,6 +62,7 @@ public class BiomeCondition extends RecipeCondition<BiomeCondition> {
 
     @Override
     public Component getTooltips() {
+        if (biomes == null) biomes = unresolvedBiomes.get();
 
         if (biomes.size() == 1) {
             var key = biomes.get(0).unwrapKey().orElseThrow();
@@ -87,6 +95,8 @@ public class BiomeCondition extends RecipeCondition<BiomeCondition> {
     public boolean testCondition(@NotNull GTRecipe recipe, @NotNull RecipeLogic recipeLogic) {
         Level level = recipeLogic.getLevel();
         Holder<Biome> biome = level.getBiome(recipeLogic.getBlockPos());
+
+        if (biomes == null) biomes = unresolvedBiomes.get();
         return biomes.contains(biome);
     }
 
