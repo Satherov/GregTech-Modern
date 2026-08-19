@@ -5373,13 +5373,13 @@ Blocks: <code>adjacentBlock</code>, <code>adjacentBlockTag</code> -&gt; <code>ad
 - the Jade tooltip for all machines</p>
 <p>You are supposed to replace <code>ModifierFunction.NULL</code> with <code>ModifierFunction.cancel(reason)</code> to tell the machine why the recipe fails to start.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>- return ModifierFunction.NULL;
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>+ return ModifierFunction.cancel(Component.translatable(&quot;gtceu.recipe_modifier.xxx&quot;));
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>+ return ModifierFunction.cancel(Component.translatable("gtceu.recipe_modifier.xxx"));
 </code></pre></div></p>
 <p>Also, if you cancel a recipe in <code>IRecipeLogicMachine#beforeWorking()</code>, you are supposed to add some custom reason info like:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>@Override
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>public boolean beforeWorking(@Nullable GTRecipe recipe) {
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    if(xxx){
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        RecipeLogic.putFailureReason(this, recipe, Component.literal(&quot;Machine spirit is displeased&quot;));
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        RecipeLogic.putFailureReason(this, recipe, Component.literal("Machine spirit is displeased"));
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        return false
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    }
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    return true;
