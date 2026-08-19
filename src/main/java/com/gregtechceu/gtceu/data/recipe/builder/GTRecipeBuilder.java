@@ -89,7 +89,6 @@ public class GTRecipeBuilder {
 
     public final List<RecipeCondition<?>> conditions = new ArrayList<>();
 
-    @NotNull
     public CompoundTag data = new CompoundTag();
     @Setter
     public ResourceLocation id;
@@ -583,7 +582,7 @@ public class GTRecipeBuilder {
         return outputItems(orePrefix, material, 1);
     }
 
-    public GTRecipeBuilder outputItems(TagPrefix orePrefix, @NotNull Material material, int count) {
+    public GTRecipeBuilder outputItems(TagPrefix orePrefix, Material material, int count) {
         if (orePrefix.isEmpty() || material.isNull()) {
             GTCEu.LOGGER.error(
                     "Tried to set output item stack that doesn't exist, id: {}, TagPrefix: {}, Material: {}, Count: {}",
@@ -1131,28 +1130,32 @@ public class GTRecipeBuilder {
         return dimension(dimension, false);
     }
 
-    public GTRecipeBuilder biome(ResourceLocation biome, boolean reverse) {
-        return biome(ResourceKey.create(Registries.BIOME, biome), reverse);
-    }
-
-    public GTRecipeBuilder biome(ResourceLocation biome) {
-        return biome(biome, false);
-    }
-
     public GTRecipeBuilder biome(ResourceKey<Biome> biome, boolean reverse) {
-        return addCondition(new BiomeCondition(biome).setReverse(reverse));
+        HolderSet<Biome> biomes = HolderSet.direct(GTRegistries.builtinRegistry().registryOrThrow(Registries.BIOME).getHolderOrThrow(biome));
+        return addCondition(new BiomeCondition(biomes).setReverse(reverse));
     }
 
     public GTRecipeBuilder biome(ResourceKey<Biome> biome) {
         return biome(biome, false);
     }
 
-    public GTRecipeBuilder biomeTag(TagKey<Biome> biome, boolean reverse) {
-        return addCondition(new BiomeTagCondition(biome).setReverse(reverse));
+    public GTRecipeBuilder biomes(TagKey<Biome> biome, boolean reverse) {
+        HolderSet<Biome> biomes = GTRegistries.builtinRegistry().registryOrThrow(Registries.BIOME).getTag(biome)
+                .orElseThrow(() -> new IllegalArgumentException("Unknown biome tag: " + biome.location()));
+
+        return addCondition(new BiomeCondition(biomes).setReverse(reverse));
     }
 
-    public GTRecipeBuilder biomeTag(TagKey<Biome> biome) {
-        return biomeTag(biome, false);
+    public GTRecipeBuilder biomes(TagKey<Biome> biome) {
+        return biomes(biome, false);
+    }
+
+    public GTRecipeBuilder biomes(HolderSet<Biome> biomes, boolean reverse) {
+        return addCondition(new BiomeCondition(biomes).setReverse(reverse));
+    }
+
+    public GTRecipeBuilder biomes(HolderSet<Biome> biomes) {
+        return biomes(biomes, false);
     }
 
     public GTRecipeBuilder rain(float level, boolean reverse) {

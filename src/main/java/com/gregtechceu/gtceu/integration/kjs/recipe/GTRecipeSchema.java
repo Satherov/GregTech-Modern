@@ -32,6 +32,7 @@ import com.gregtechceu.gtceu.integration.kjs.recipe.components.ExtendedOutputIte
 import com.gregtechceu.gtceu.integration.kjs.recipe.components.GTRecipeComponents;
 import com.gregtechceu.gtceu.utils.ResearchManager;
 
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -955,28 +956,40 @@ public interface GTRecipeSchema {
             return dimension(dimension, false);
         }
 
-        public GTRecipeJS biome(ResourceLocation biome, boolean reverse) {
-            return biome(ResourceKey.create(Registries.BIOME, biome), reverse);
-        }
-
-        public GTRecipeJS biome(ResourceLocation biome) {
-            return biome(biome, false);
-        }
-
         public GTRecipeJS biome(ResourceKey<Biome> biome, boolean reverse) {
-            return addCondition(new BiomeCondition(biome).setReverse(reverse));
+            HolderSet<Biome> biomes = HolderSet.direct(GTRegistries.builtinRegistry().registryOrThrow(Registries.BIOME).getHolderOrThrow(biome));
+            return addCondition(new BiomeCondition(biomes).setReverse(reverse));
         }
 
         public GTRecipeJS biome(ResourceKey<Biome> biome) {
             return biome(biome, false);
         }
 
-        public GTRecipeJS biomeTag(ResourceLocation biome, boolean reverse) {
-            return addCondition(new BiomeTagCondition(TagKey.create(Registries.BIOME, biome)).setReverse(reverse));
+        public GTRecipeJS biomes(TagKey<Biome> biome, boolean reverse) {
+            HolderSet<Biome> biomes = GTRegistries.builtinRegistry().registryOrThrow(Registries.BIOME).getTag(biome)
+                    .orElseThrow(() -> new IllegalArgumentException("Unknown biome tag: " + biome.location()));
+
+            return addCondition(new BiomeCondition(biomes).setReverse(reverse));
         }
 
-        public GTRecipeJS biomeTag(ResourceLocation biome) {
-            return biomeTag(biome, false);
+        public GTRecipeJS biomes(TagKey<Biome> biome) {
+            return biomes(biome, false);
+        }
+
+        public GTRecipeJS biomes(HolderSet<Biome> biomes, boolean reverse) {
+            return addCondition(new BiomeCondition(biomes).setReverse(reverse));
+        }
+
+        public GTRecipeJS biomes(HolderSet<Biome> biomes) {
+            return biomes(biomes, false);
+        }
+
+        public GTRecipeJS biome(ResourceLocation biome, boolean reverse) {
+            return biome(ResourceKey.create(Registries.BIOME, biome), reverse);
+        }
+
+        public GTRecipeJS biome(ResourceLocation biome) {
+            return biome(biome, false);
         }
 
         public GTRecipeJS rain(float level, boolean reverse) {

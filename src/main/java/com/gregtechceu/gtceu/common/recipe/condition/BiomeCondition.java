@@ -7,10 +7,12 @@ import com.gregtechceu.gtceu.api.recipe.condition.RecipeConditionType;
 import com.gregtechceu.gtceu.common.data.GTRecipeConditions;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.HolderSetCodec;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 
@@ -25,21 +27,20 @@ public class BiomeCondition extends RecipeCondition<BiomeCondition> {
 
     // spotless:off
     public static final Codec<BiomeCondition> CODEC = RecordCodecBuilder.create(instance -> RecipeCondition.isReverse(instance).and(
-            ResourceKey.codec(Registries.BIOME).fieldOf("biome").forGetter(val -> val.biome)
+            HolderSetCodec.create(Registries.BIOME, RegistryFixedCodec.create(Registries.BIOME), true).fieldOf("biomes").forGetter(val -> val.biomes)
     ).apply(instance, BiomeCondition::new));
     // spotless:on
 
     @Getter
-    private ResourceKey<Biome> biome = ResourceKey.create(Registries.BIOME,
-            ResourceLocation.withDefaultNamespace("dummy"));
+    private HolderSet<Biome> biomes = HolderSet.direct();
 
-    public BiomeCondition(boolean isReverse, ResourceKey<Biome> biome) {
+    public BiomeCondition(boolean isReverse, HolderSet<Biome> biomes) {
         super(isReverse);
-        this.biome = biome;
+        this.biomes = biomes;
     }
 
-    public BiomeCondition(ResourceKey<Biome> biome) {
-        this.biome = biome;
+    public BiomeCondition(HolderSet<Biome> biomes) {
+        this(false, biomes);
     }
 
     @Override
@@ -54,16 +55,39 @@ public class BiomeCondition extends RecipeCondition<BiomeCondition> {
 
     @Override
     public Component getTooltips() {
-        return Component.translatable("recipe.condition.biome.tooltip",
-                Component.translatableWithFallback(biome.location().toLanguageKey("biome"),
-                        biome.location().toString()));
+
+        if (biomes.size() == 1) {
+            var key = biomes.get(0).unwrapKey().orElseThrow();
+            return Component.translatable("recipe.condition.biome.tooltip",
+                    Component.translatableWithFallback(key.location().toLanguageKey("biome"),
+                            key.location().toString()));
+        }
+
+        if (biomes instanceof HolderSet.Named<Biome> tag) {
+            return Component.translatable("recipe.condition.biome.tooltip",
+                    Component.translatableWithFallback(tag.key().location().toLanguageKey("biome"),
+                            tag.key().location().toString()));
+        }
+
+        MutableComponent component = null;
+
+        for (Holder<Biome> biome: biomes) {
+            var key = biome.unwrapKey().orElseThrow();
+            MutableComponent biomeLang = Component.translatableWithFallback(key.location().toLanguageKey("biome"),
+                    key.location().toString());
+
+            if (component != null) component.append(", ").append(biomeLang);
+            else component = biomeLang;
+        }
+
+        return Component.translatable("recipe.condition.biome.tooltip", component);
     }
 
     @Override
     public boolean testCondition(@NotNull GTRecipe recipe, @NotNull RecipeLogic recipeLogic) {
         Level level = recipeLogic.getLevel();
         Holder<Biome> biome = level.getBiome(recipeLogic.getBlockPos());
-        return biome.is(this.biome);
+        return biomes.contains(biome);
     }
 
     @Override
